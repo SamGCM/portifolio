@@ -1,0 +1,104 @@
+
+body{
+    #container-1{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        h1{
+            font-family: $font-primary;
+            color:$color-quaternary;
+            font-size: 10rem;
+        }
+        div{
+            display: flex;
+            justify-content: space-between;
+            width: 32rem;
+            a{
+                text-decoration: none;
+                img{
+                    width: 8rem;
+                    height: 8rem;
+                }
+            }
+        }
+        #arrow-down{
+            position: relative;
+            width: 8rem;
+            top: 10rem;
+        }
+    }
+
+
+    #portifolio{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        .title-section{
+            display: flex;
+            align-items: center;
+            h1{
+                font-family: $font-secondary;
+                color:$color-quaternary;
+                font-size: 8rem;
+            }
+            h2{
+                font-family: $font-secondary;
+                color:$color-tertiary;
+                font-size: 10rem;
+            }
+        }
+        #container-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
+            column-gap: 5rem;
+            row-gap: 4rem;
+            width: 80vw;
+            position: relative;
+            .grid-item{
+                width: fit-content;
+                position: relative;
+                img{
+                    width: 30rem;
+                    height: 17rem;
+                    
+                }
+                div{
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 2;
+                    top: 0rem;
+                    background: $color-tertiary;
+                    width: 30rem;
+                    height: 17rem;
+                    opacity: 0%;
+                    a{
+                        text-decoration: none;
+                        background: transparent;
+                        font-family: $font-secondary;
+                        font-size: 3rem;
+                        border: 2px solid white;
+                        color: $color-quaternary;
+                        width: fit-content;
+                        padding: 0.5rem;
+                    }
+                    &:hover{
+                        opacity: 100%;
+                    }
+                }
+                figcaption{
+                    font-family: $font-secondary;
+                    font-size: 3rem;
+                    color: $color-quaternary;
+                    text-align: center;
+                }
+                
+            }
+        }
+    }
+}
