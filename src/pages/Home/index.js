@@ -23,7 +23,7 @@ export default class Home extends React.Component{
                             <img src={github} alt="Link for Github"/>
                         </a>
                     </div>
-                    <img id="arrow-down" src={arrow} alt="Arrow for down"/>
+                    <a href="#portifolio" id="link-arrow"><img id="arrow-down" src={arrow} alt="Arrow for down"/></a>
                 </section>
                 <section id="portifolio">
                     <div class="title-section">
@@ -81,9 +81,11 @@ export default class Home extends React.Component{
                 </section>
                 <section id="skills">
                     <h3>Competências</h3>
-                    <span>Front-end: HTML5, CSS3/SASS/LESS, JavaScript, JSX, React.JS, JSON, EJS,Parcel</span>
-                    <span>Soft-Skills: Experiência em oratória, boa comunicação, trabalho em equipe, vontade de aprender</span>
-                    <span>Outras: Git/Github, PSCS6, Stack-Overflow, Figma</span>
+                    <div>
+                        <span><strong>Front-end:</strong> HTML5, CSS3/SASS/LESS, JavaScript, JSX, React.JS, JSON, EJS,Parcel</span>
+                        <span><strong>Soft-Skills:</strong> Experiência em oratória, boa comunicação, trabalho em equipe, vontade de aprender</span>
+                        <span><strong>Outras:</strong> Git/Github, PSCS6, Stack-Overflow, Figma</span>
+                    </div>
                 </section>
                 <section id="form-email">
                     <div class="title-section">
