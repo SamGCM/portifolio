@@ -86,7 +86,10 @@ export default class Home extends React.Component{
                     <span>Outras: Git/Github, PSCS6, Stack-Overflow, Figma</span>
                 </section>
                 <section id="form-email">
-                    <div id="container-glass"></div>
+                    <div class="title-section">
+                        <h1>Entre em Contato</h1>
+                        <h2>.</h2>
+                    </div>
                     <form method="post">
                         <div>
                             <label for='nome'>Nome</label>
