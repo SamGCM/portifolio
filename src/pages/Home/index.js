@@ -52,7 +52,7 @@ export default class Home extends React.Component{
                         <div class="grid-item">
                             <img src={adoteMe} alt="Imagem do site"/>
                             <div>
-                                <a href="https://adote-3o31jze2n-samgcm.vercel.app/" target="_blank" rel="noreferrer">
+                                <a href="https://adote-me.vercel.app/" target="_blank" rel="noreferrer">
                                     VER MAIS
                                 </a>
                             </div>
