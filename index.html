@@ -1,733 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-  <meta charset="utf-8" />
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Matos | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #64ffda;
+            --bg-dark: #0a192f;
+            --bg-light: #112240;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --white: #e6f1ff;
+        }
 
-  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+        
+        /* Layout */
+        section { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
+        h3.section-title { 
+            font-size: 1.8rem; color: var(--white); margin-bottom: 40px; 
+            display: flex; align-items: center; 
+        }
+        h3.section-title::after { 
+            content: ""; width: 200px; height: 1px; background: var(--text-dim); margin-left: 20px; 
+        }
 
-  <meta
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    name="viewport"
-  />
+        /* Header */
+        header { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; 
+            background: radial-gradient(circle at 10% 20%, rgba(100, 255, 218, 0.05) 0%, transparent 50%);
+        }
+        .hero h1 { font-size: clamp(40px, 8vw, 70px); color: var(--white); margin: 10px 0; }
+        .hero h2 { font-size: clamp(20px, 4vw, 35px); color: var(--text-dim); }
+        .contact-info { margin-top: 20px; font-family: monospace; color: var(--primary); }
 
-  <title>Samuel Gama</title>
+        /* Timeline de Experiência */
+        .timeline { border-left: 2px solid var(--bg-light); padding-left: 30px; position: relative; }
+        .timeline-item { position: relative; margin-bottom: 50px; }
+        .timeline-item::before {
+            content: ""; position: absolute; left: -39px; top: 5px;
+            width: 15px; height: 15px; background: var(--primary); border-radius: 50%;
+        }
+        .timeline-date { color: var(--primary); font-family: monospace; font-size: 0.9rem; }
+        .timeline-company { font-size: 1.4rem; color: var(--white); font-weight: bold; display: block; }
+        .timeline-role { color: var(--text-dim); font-style: italic; }
 
-  <meta property="og:title" content="Homepage | Atom Template" />
+        /* Grid de Projetos */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .project-card { 
+            background: var(--bg-light); border-radius: 10px; overflow: hidden; 
+            transition: 0.3s; border: 1px solid transparent;
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .project-img { width: 100%; height: 200px; background: #0d1b2a; overflow: hidden; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .project-card:hover img { opacity: 1; }
+        
+        .project-content { padding: 20px; }
+        .project-content h4 { color: var(--white); margin-bottom: 10px; }
+        .project-content p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 15px; text-align: justify; }
+        .stack { font-family: monospace; font-size: 0.75rem; color: var(--primary); }
 
-  <meta property="og:locale" content="en_US" />
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--bg-light); }
+        .social a { color: var(--text-dim); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
+        .social a:hover { color: var(--primary); }
 
-  <link
-    rel="canonical"
-    href="//"
-  />
-
-  <meta
-    property="og:url"
-    content="//"
-  />
-
-  <meta
-    name="description"
-    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  />
-
-  <meta name="theme-color" content="#4169e1" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <meta name="twitter:site" content="@tailwindmade" />
-
-  <link
-    crossorigin="crossorigin"
-    href="https://fonts.gstatic.com"
-    rel="preconnect"
-  />
-
-  <link
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap"
-    rel="preload"
-  />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link
-    href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-    rel="stylesheet"
-  />
-
-  <link
-    crossorigin="anonymous"
-    href="/assets/styles/main.min.css"
-    media="screen"
-    rel="stylesheet"
-  />
-  
-  <script
-    defer
-    src="https://unpkg.com/@alpine-collective/toolkit@1.0.0/dist/cdn.min.js"
-  ></script>
-
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  
+        @media (max-width: 768px) { section { padding: 60px 5%; } .projects-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
+<body>
 
-
-  <body
-    :class="{ 'overflow-hidden max-h-screen': mobileMenu }"
-    class="relative"
-    x-data="{ mobileMenu: false }"
-  >
-    
-    <div id="main" class="relative">
-      <div
-  x-data="{
-    triggerNavItem(id) {
-        $scroll(id)
-    },
-    triggerMobileNavItem(id) {
-        mobileMenu = false;
-        this.triggerNavItem(id)
-    }
-}"
->
-  <div class="w-full z-50 top-0 py-3 sm:py-5  absolute
-  ">
-  <div class="container flex items-center justify-between">
-    <div>
-
-    </div>
-    <div class="hidden lg:block">
-      <ul class="flex items-center">
-        
-        <li class="group pl-6">
-          
-          <span
-            @click="triggerNavItem('#about')"
-            class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-            >Sobre</span
-          >
-          
-          <span
-            class="block h-0.5 w-full bg-transparent group-hover:bg-yellow"
-          ></span>
-        </li>
-        
-        <li class="group pl-6">
-          
-          <span
-            @click="triggerNavItem('#services')"
-            class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-            >Serviços</span
-          >
-          
-          <span
-            class="block h-0.5 w-full bg-transparent group-hover:bg-yellow"
-          ></span>
-        </li>
-        
-        <li class="group pl-6">
-          
-          <span
-            @click="triggerNavItem('#portfolio')"
-            class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-            >Portfolio</span
-          >
-          
-          <span
-            class="block h-0.5 w-full bg-transparent group-hover:bg-yellow"
-          ></span>
-        </li>
-        
-        <li class="group pl-6">
-          
-          <span
-            @click="triggerNavItem('#work')"
-            class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-            >Experiência</span
-          >
-          
-          <span
-            class="block h-0.5 w-full bg-transparent group-hover:bg-yellow"
-          ></span>
-        </li>
-      
-        
-        <li class="group pl-6">
-          
-          <span
-            @click="triggerNavItem('#contact')"
-            class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-            >Contato</span
-          >
-          
-          <span
-            class="block h-0.5 w-full bg-transparent group-hover:bg-yellow"
-          ></span>
-        </li>
-        
-      </ul>
-    </div>
-    <div class="block lg:hidden">
-      <button @click="mobileMenu = true">
-        <i class="bx bx-menu text-4xl text-white"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<div
-  class="pointer-events-none fixed inset-0 z-70 min-h-screen bg-black bg-opacity-70 opacity-0 transition-opacity lg:hidden"
-  :class="{ 'opacity-100 pointer-events-auto': mobileMenu }"
->
-  <div
-    class="absolute right-0 min-h-screen w-2/3 bg-primary py-4 px-8 shadow md:w-1/3"
-  >
-    <button
-      class="absolute top-0 right-0 mt-4 mr-4"
-      @click="mobileMenu = false"
-    >
-      <img src="/assets/img/icon-close.svg" class="h-10 w-auto" alt="" />
-    </button>
-
-    <ul class="mt-8 flex flex-col">
-      
-      <li class="py-2">
-        
-        <span
-          @click="triggerMobileNavItem('#about')"
-          class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-          >Sobre</span
-        >
-        
-      </li>
-      
-      <li class="py-2">
-        
-        <span
-          @click="triggerMobileNavItem('#services')"
-          class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-          >Serviços</span
-        >
-        
-      </li>
-      
-      <li class="py-2">
-        
-        <span
-          @click="triggerMobileNavItem('#portfolio')"
-          class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-          >Portfolio</span
-        >
-        
-      </li>
-    
-      
-      <li class="py-2">
-        
-        <span
-          @click="triggerMobileNavItem('#work')"
-          class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-          >Experiência</span
-        >
-        
-      </li>
-      
-      <li class="py-2">
-        
-        <span
-          @click="triggerMobileNavItem('#contact')"
-          class="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white"
-          >Contato</span
-        >
-        
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-
-      <div><div
-  class="relative bg-cover bg-center bg-no-repeat py-8"
-  style="background-image: url(/assets/img/bg-hero.jpg)"
->
-  <div
-    class="absolute inset-0 z-20 bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-cover bg-center bg-no-repeat"
-  ></div>
-
-  <div
-    class="container relative z-30 pt-20 pb-12 sm:pt-56 sm:pb-48 lg:pt-64 lg:pb-48"
-  >
-    <div class="flex flex-col items-center justify-center lg:flex-row">
-
-      <div class="pt-8 sm:pt-10 lg:pl-8 lg:pt-0">
-        <h1
-          class="text-center font-header text-4xl text-white sm:text-left sm:text-5xl md:text-6xl"
-        >
-          Oi, eu sou o Samuel!
-        </h1>
-        <div
-          class="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start"
-        >
-          <div
-            class="flex items-center justify-center pl-0 sm:justify-start md:pl-1"
-          >
-            <p class="font-body text-lg uppercase text-white">Vamos nos conectar</p>
-            <div class="hidden sm:block">
-              <i class="bx bx-chevron-right text-3xl text-yellow"></i>
+    <header>
+        <div class="hero">
+            <p style="color: var(--primary); font-family: monospace;">Olá, meu nome é</p>
+            <h1>Samuel Gama.</h1>
+            <h2>Desenvolvedor Fullstack</h2>
+            <div class="contact-info">
+                Ceará • samuelcruz052@gmail.com
             </div>
-          </div>
-          <div
-            class="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0"
-          >
-            <a href="https://dribbble.com/SamGCM" class="pl-4">
-              <i
-                class="bx bxl-dribbble text-2xl text-white hover:text-yellow"
-              ></i>
-            </a>
-            <a href="https://www.linkedin.com/in/samuel-gama/" class="pl-4">
-              <i
-                class="bx bxl-linkedin text-2xl text-white hover:text-yellow"
-              ></i>
-            </a>
-            <a href="https://github.com/SamGCM" class="pl-4">
-              <i
-                class="bx bxl-github text-2xl text-white hover:text-yellow"
-              ></i>
-            </a>
-            <a href="https://medium.com/samuel-cruz" class="pl-4">
-              <i
-                class="bx bxl-medium text-2xl text-white hover:text-yellow"
-              ></i>
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<div class="bg-grey-50" id="about">
-  <div class="container flex flex-col items-center justify-center py-16 md:py-20 lg:flex-row">
-    <div class="w-full text-center sm:w-3/4 lg:w-3/5 lg:text-center">
-      <h2
-        class="font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-      >
-        Sobre mim
-      </h2>
-      <h4
-        class="pt-6 font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-      >
-        Eu sou Samuel, um Web Designer & Desenvolvedor Front end, 
-      </h4>
-      <p class="pt-6 font-body leading-relaxed text-grey-20">
-        para falar um pouco de mim, preciso falar o quanto amo música. Meu estilo preferido é o R&B, mas o mais interessante é que independente do estilo musical, cada uma das músicas foram escritas com o objetivo de transmitir uma mensagem e sentimentos. Eu trago esse conceito também ao desenvolvimento de softwares.
-
-Ao desenvolver penso no impacto que o software vai ter na vida das pessoas, o que ele vai possibilitar a elas e como ele pode crescer. Isso me ajuda a pensar na escalabilidade do projeto, o que pode ser melhorado e o principal, na experiência do usuário.
-
-Aprendi muito sobre isso na 100pay, empresa de meios de pagamentos, e a Ox Muscle Suplementos. Todas elas não queriam só vender seus serviços, mas dá o melhor serviço para seus clientes, e ter contato com empresas assim me fizeram crescer bastante.
-
-Cursos como o Santander Coders FullStack, me ajudou ter o pensamento de softwares escaláveis. Criamos algumas API com Java e Spring, e Páginas com Angular. E tenho aplicado esses conceitos mesmo trabalhando com outros frameworks e linguagens como Javascript, Typescript e React.
-      </p>
-  </div>
-</div>
-
-<div class="container py-16 md:py-20" id="services">
-  <h2
-    class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-  >
-    Habilidades
-  </h2>
-  <h3
-    class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-  >
-    Serviços que ofereço
-  </h3>
-
-  <div
-    class="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3"
-  >
-    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-      <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-        <div class="hidden group-hover:block">
-          <img
-            src="/assets/img/icon-development-white.svg"
-            alt="development icon"
-          />
-        </div>
-        <div class="block group-hover:hidden">
-          <img
-            src="/assets/img/icon-development-black.svg"
-            alt="development icon"
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <h3
-          class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-        >
-          DESENVOLVIMENTO FRONT END
-        </h3>
-        <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-          Criação de site com javascript, usando usando React, Typescript, bibliotecas de CSS e Storybook.
-        </p>
-      </div>
-    </div>
-    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-      <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-        <div class="hidden group-hover:block">
-          <img
-            src="/assets/img/icon-content-white.svg"
-            alt="content marketing icon"
-          />
-        </div>
-        <div class="block group-hover:hidden">
-          <img
-            src="/assets/img/icon-content-black.svg"
-            alt="content marketing icon"
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <h3
-          class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-        >
-          Boas práticas
-        </h3>
-        <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-          Desenvolvimento de documentação, testes e refatoração de código.
-        </p>
-      </div>
-    </div>
-    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-      <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-        <div class="hidden group-hover:block">
-          <img
-            src="/assets/img/icon-email-white.svg"
-            alt="Email Marketing icon"
-          />
-        </div>
-        <div class="block group-hover:hidden">
-          <img
-            src="/assets/img/icon-email-black.svg"
-            alt="Email Marketing icon"
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <h3
-          class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-        >
-          EMAIL DE MARKETING
-        </h3>
-        <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-          Geração de templates para emails de marketing
-        </p>
-      </div>
-    </div>
-    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-      <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-        <div class="hidden group-hover:block">
-          <img
-            src="/assets/img/icon-design-white.svg"
-            alt="Theme Design icon"
-          />
-        </div>
-        <div class="block group-hover:hidden">
-          <img
-            src="/assets/img/icon-design-black.svg"
-            alt="Theme Design icon"
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <h3
-          class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-        >
-          DESIGN GRÁFICO
-        </h3>
-        <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-          Edição de fotos e produção de banners com photoshop, figma.
-        </p>
-      </div>
-    </div>
-    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-      <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-        <div class="hidden group-hover:block">
-          <img
-            src="/assets/img/icon-graphics-white.svg"
-            alt="Graphic Design icon"
-          />
-        </div>
-        <div class="block group-hover:hidden">
-          <img
-            src="/assets/img/icon-graphics-black.svg"
-            alt="Graphic Design icon"
-          />
-        </div>
-      </div>
-      <div class="text-center">
-        <h3
-          class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-        >
-          Web Design
-        </h3>
-        <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-          Criação de site com page builder, wordpress, woocommerce, shopify.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container py-16 md:py-20" id="portfolio">
-  <h2
-    class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-  >
-    Meu Portfolio
-  </h2>
-  <h3
-    class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-  >
-    Alguns dos trabalhos que fiz e participei
-  </h3>
-
-  <div
-    class="mx-auto grid w-full grid-cols-1 gap-8 pt-12 sm:w-3/4 md:gap-10 lg:w-full lg:grid-cols-2"
-  >
-    <a
-      href="https://www.veritavino.com.br/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/verità vino.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-    <a
-      href="https://netflix-lets-code.vercel.app/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/netflix.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-    <a
-      href="https://100pay-samgcm.vercel.app/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/100pay.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-    <a
-      href="https://vitapure-c5uo6dtjx-samgcm.vercel.app/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/vitapure.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-    <a
-      href="https://cult-gaia.vercel.app/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/cult gaia.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-    <a
-      href="https://dreamboxbrasil.com.br/"
-      class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-    >
-      <img
-        src="/assets/img/dreambox.png"
-        class="w-full shadow"
-        alt="portfolio image"
-      />
-    </a>
-  </div>
-</div>
-
-<div class="container py-16 md:py-20" id="work">
-  <h2
-    class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-  >
-    Experiência profissional
-  </h2>
-  <h3
-    class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-  >
-    Empresas com quem trabalhei até agora
-  </h3>
-
-  <div class="relative mx-auto mt-12 flex w-full flex-col lg:w-2/3">
-    <span
-      class="left-2/5 absolute inset-y-0 ml-10 hidden w-0.5 bg-grey-40 md:block"
-    ></span>
-
-    <div class="mt-8 flex flex-col text-center md:flex-row md:text-left">
-      <div class="md:w-2/5">
-        <div class="flex justify-center md:justify-start">
-          <span class="shrink-0">
-            <img
-              src="/assets/img/logo-ox.png"
-              class="h-auto w-32"
-              alt="company logo"
-            />
-          </span>
-          <div class="relative ml-3 hidden w-full md:block">
-            <span
-              class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"
-            ></span>
-          </div>
-        </div>
-      </div>
-      <div class="md:w-3/5">
-        <div class="relative flex md:pl-18">
-          <span
-            class="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"
-          ></span>
-
-          <div class="mt-1 flex">
-            <i class="bx bxs-right-arrow hidden text-primary md:block"></i>
-            <div class="md:-mt-1 md:pl-8">
-              <span class="block font-body font-bold text-grey-40"
-                >Jan 2020 - Atual</span
-              >
-              <span
-                class="block pt-2 font-header text-xl font-bold uppercase text-primary"
-                >Web Designer Freelancer</span
-              >
-              <div class="pt-2">
-                <span class="block font-body text-black"
-                  >
-                  Manutenção de site wordpress/woocommerce
-                  Faço integração de meios de pagamentos e novas funcionalidades
-                  Integração de produtos com lojas virtuais e configurações usando o BLING
-                  Criação de design de propagandas e banners
-                  </span
-                >
-              </div>
+    <!-- Linha do Tempo -->
+    <section id="experience">
+        <h3 class="section-title">Experiência Profissional</h3>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <span class="timeline-date">Novembro de 2023 – Atualmente</span>
+                <span class="timeline-company">Colmeia Soluções em Tecnologia</span>
+                <span class="timeline-role">Desenvolvedor Full Stack</span>
+                <p>Lidero a equipe para um desenvolvimento escalável ajudando na divisão de tarefas, criação de componentes reutilizáveis e arquitetura do projeto.</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="mt-8 flex flex-col text-center md:flex-row md:text-left">
-      <div class="md:w-2/5">
-        <div class="flex justify-center md:justify-start">
-          <span class="shrink-0">
-            <img
-              src="/assets/img/LOGO-100PAY-VETOR.webp"
-              class="h-auto w-32"
-              alt="company logo"
-            />
-          </span>
-          <div class="relative ml-3 hidden w-full md:block">
-            <span
-              class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"
-            ></span>
-          </div>
-        </div>
-      </div>
-      <div class="md:w-3/5">
-        <div class="relative flex md:pl-18">
-          <span
-            class="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"
-          ></span>
-
-          <div class="mt-1 flex">
-            <i class="bx bxs-right-arrow hidden text-primary md:block"></i>
-            <div class="md:-mt-1 md:pl-8">
-              <span class="block font-body font-bold text-grey-40"
-                >Ago 2021 - Dez 2022</span
-              >
-              <span
-                class="block pt-2 font-header text-xl font-bold uppercase text-primary"
-                >Desenvolvedor Front end</span
-              >
-              <div class="pt-2">
-                <span class="block font-body text-black"
-                  >Trabalhei com a stack typescript, react.js, storybook.
-                  Iniciei alguns projetos de landing pages para pagamentos de doações de igrejas, fazendo integração com a API da empresa.
-                  Criação de UI para algumas features e projetos.</span
-                >
-              </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Novembro de 2022 – Novembro de 2023</span>
+                <span class="timeline-company">Ox Muscle Suplementos</span>
+                <span class="timeline-role">Desenvolvedor Frontend</span>
             </div>
-          </div>
+
+            <div class="timeline-item">
+                <span class="timeline-date">Agosto de 2021 – Novembro de 2022</span>
+                <span class="timeline-company">100Pay/SIFRAPAG</span>
+                <span class="timeline-role">Desenvolvedor Frontend</span>
+            </div>
+            
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<div class="container py-16 md:py-20" id="contact">
-  
-  <div class="flex flex-col pt-16 lg:flex-row">
-    <div
-      class="w-full border-l-2 border-t-2 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3"
-    >
-      <div class="flex items-center">
-        <i class="bx bx-phone text-2xl text-grey-40"></i>
-        <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-          Celular
-        </p>
-      </div>
-      <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-        (85) 98711 9894
-      </p>
-    </div>
-    <div
-      class="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3 lg:border-l-0 lg:border-t-2"
-    >
-      <div class="flex items-center">
-        <i class="bx bx-envelope text-2xl text-grey-40"></i>
-        <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-          Email
-        </p>
-      </div>
-      <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-        samuelgama2009@gmail.com
-      </p>
-    </div>
-    <div
-      class="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3 lg:border-l-0 lg:border-t-2"
-    >
-      <div class="flex items-center">
-        <i class="bx bx-map text-2xl text-grey-40"></i>
-        <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-          Localização
-        </p>
-      </div>
-      <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-        Ceará, Brasil
-      </p>
-    </div>
-  </div>
-</div>
+    <!-- Projetos com descrições originais -->
+    <section id="projects">
+        <h3 class="section-title">Projetos Realizados</h3>
+        <div class="projects-grid">
 
+            <!-- TercIA -->
+            <div class="project-card">
+                <div class="project-img"><img src="https://cdn.dribbble.com/userupload/37292147/file/original-92122a80f24d062372e4f13fcb4b38f5.jpg" alt="TercIA"></div>
+                <div class="project-content">
+                    <h4>Projeto: TercIA</h4>
+                    <p>Teleatendimento da EMATERCE com videoconferência própria + IA (transcrição, sumarização, recomendações) e integração com WhatsApp Business; desafios: conectividade rural, filas/mensageria, observabilidade e LGPD.</p>
+                    <div class="stack">Stack: Java, Spring Boot, Angular, TypeScript e Jest.</div>
+                </div>
+            </div>
 
+            <!-- Raízes Cearenses -->
+            <div class="project-card">
+                <div class="project-img"><img src="https://www.etice.ce.gov.br/wp-content/uploads/sites/5/2025/11/Raizes-site.jpg" alt="Raízes Cearenses"></div>
+                <div class="project-content">
+                    <h4>Projeto: Raízes Cearenses</h4>
+                    <p>Marketplace para conexão entre produtores rurais e consumidores no Ceará, com plataforma unificada para e-commerce agrícola incluindo gestão de catálogo, pedidos e estoque. Objetivo: facilitar descoberta de produtos e acelerar comercialização com segurança e acessibilidade.</p>
+                    <div class="stack">Stack: Java, Spring Boot, Angular, React.js, TypeScript, NX e Jest.</div>
+                </div>
+            </div>
 
-      
+            <!-- Painel Gerencial -->
+            <div class="project-card">
+                <div class="project-img"><img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/209391174/original/5cfad9d2f70fe5b40f96ed790faa09148b7bc88c/design-awesome-dashboard-ui-and-ux.png" alt="Painel Gerencial"></div>
+                <div class="project-content">
+                    <h4>Projeto: Painel Gerencial</h4>
+                    <p>Plataforma que converte documentos (PDFs, planilhas, textos) em base de conhecimento para um assistente de IA, com painel de curadoria (upload, versionamento, classificação, acesso) e disponibilizada via WhatsApp e/ou webchat. Desafios: ingestão/normalização, indexação semântica, atualização quase em tempo real, rastreabilidade, observabilidade e LGPD.</p>
+                    <div class="stack">Stack: Java, Spring Boot, Angular, TypeScript.</div>
+                </div>
+            </div>
 
-    <script src="/assets/js/main.js"></script>
+            <!-- Cidade Mais Infância -->
+            <div class="project-card">
+                <div class="project-img"><img src="https://www.sps.ce.gov.br/wp-content/uploads/sites/16/2023/09/cidade_Minfancia_capasite_1280x658.png" alt="Cidade Mais Infância"></div>
+                <div class="project-content">
+                    <h4>Projeto: Cidade Mais Infância</h4>
+                    <p>Gestão de agendamentos, controle de visitantes e organização de dias de visitação. Integra funcionalidades para agendamento de visitas, permitindo que usuários e administradores gerenciem horários de forma intuitiva e minimizem conflitos.</p>
+                    <div class="stack">Stack: Java, Spring Boot, Angular, TypeScript, Jest.</div>
+                </div>
+            </div>
 
-    
-  </body>
+            <!-- Portal OX -->
+            <div class="project-card">
+                <div class="project-img"><img src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/556641328a64526ef6aa8d10c55967ee0c1bdb6a" alt="Portal OX"></div>
+                <div class="project-content">
+                    <h4>Projeto: Portal OX</h4>
+                    <p>Criação de sistema para manipular dados do ERP Bling e auxiliar setores da empresa como atendimento, logística e financeiro. Ouvindo e melhorando o sistema de acordo com a necessidade de cada setor.</p>
+                    <div class="stack">Stack: Next.js, TypeScript</div>
+                </div>
+            </div>
+
+            <!-- Portal 100Pay -->
+            <div class="project-card">
+                <div class="project-img"><img src="/assets/img/100pay.png" alt="100Pay"></div>
+                <div class="project-content">
+                    <h4>Projeto: Portal 100Pay</h4>
+                    <p>Gerenciamento de pagamentos e cobranças de clientes, geração e envio automatizado de links de pagamento personalizados e cobranças recorrentes.</p>
+                    <div class="stack">Stack: Nodejs, Reactjs, TypeScript</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="social">
+            <a href="https://github.com/samgcm" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/samuel-gama" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.8rem; color: var(--text-dim);">Samuel da Gama Cruz Matos © 2024</p>
+    </footer>
+
+</body>
 </html>

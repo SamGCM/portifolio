@@ -5,4 +5,11 @@ html {
   @apply font-body antialiased;
 }
 
+.image-projects {
+}
+img {
+  width: 400px;
+  height: 300px;
+}
+
 @tailwind utilities;
